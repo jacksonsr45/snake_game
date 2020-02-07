@@ -5,14 +5,19 @@ from .import*
 
 class Loop(object):
     def loop_game( self, in_game, pg, bg, pos_x, 
-                            pos_y, px_snake, py_snake, 
-                            p_snake, speed_x, speed_y, fps):
+                            pos_y, p_snake, speed_x, speed_y, 
+                            apple_x, apple_y, fps):
         """
         This loop for game 
         While in_game True
         :requere: self.in_game
         :return: self.in_game  
         """
+        
+        cont = 0
+        snake_x = randint(0, (c.WIDTH - c.PX)/10)*10
+        snake_y = randint(0, (c.HEIGHT - c.PX)/10)*10
+        snake_cont = []
         while in_game:
             """
             Limit for FPS in game 
@@ -26,25 +31,25 @@ class Loop(object):
                     in_game = False
                 
                 if event.type == pg.KEYDOWN:
-                    if event.key == pg.K_LEFT:
+                    if event.key == pg.K_LEFT and speed_x != p_snake:
                         """
                         Direction == LEFT
                         """ 
                         speed_y = 0
                         speed_x = -p_snake
-                    if event.key == pg.K_RIGHT:
+                    if event.key == pg.K_RIGHT and speed_x != -p_snake:
                         """
                         Direction == RIGHT
                         """ 
                         speed_y = 0
                         speed_x = p_snake
-                    if event.key == pg.K_UP:
+                    if event.key == pg.K_UP and speed_y != p_snake:
                         """
                         Direction == UP
                         """ 
                         speed_x = 0
                         speed_y = -p_snake
-                    if event.key == pg.K_DOWN:
+                    if event.key == pg.K_DOWN and speed_y != -p_snake:
                         """
                         Direction == DOWN
                         """ 
@@ -77,13 +82,29 @@ class Loop(object):
             pos_x += speed_x
             pos_y += speed_y
 
+            
             """
-            Update and Init class Snake has a 
-            snake in game
+            Update and Init class Apple            """
+            Draw_Apple().__apple__( pg, bg, apple_x,
+                                    apple_y, c.PX, c.PX)
+            
             """
-            snake = Draw_Snake().draw_snake( pg, bg, pos_x, 
-                                        pos_y, px_snake, py_snake)
+            Update and Init class Snake
+            """
+            __snake_init = [ snake_x, snake_y]
+            snake_cont.append(__snake_init)
+            print(snake_cont)
+            
+            if len(snake_cont) > cont:
+                del snake_cont[0]
 
+            Draw_Snake().draw_snake( pg, bg, snake_cont, c.PX, c.PX)
+            
+
+            if pos_x == apple_x and pos_y == apple_y:
+                apple_x = randint(0, (c.WIDTH - c.PX)/10)*10
+                apple_y = randint(0, (c.HEIGHT - c.PX)/10)*10
+                cont += 1
 
             """
             Testind colision with board screen 

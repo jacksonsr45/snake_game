@@ -26,9 +26,12 @@ class Snake:
         """
         self.speed_x = 0
         self.speed_y = 0
+        self.__snake_ = []
         self.p_snake = 10
         self.pos_x = randint(0, (c.WIDTH - self.p_snake)/10)*10
         self.pos_y = randint(0, (c.HEIGHT - self.p_snake)/10)*10
+        self.apple_x = randint(0, (c.WIDTH - c.PX)/10)*10
+        self.apple_y = randint(0, (c.HEIGHT - c.PX)/10)*10
 
         """
         Init self.in_game with True 
@@ -40,6 +43,6 @@ class Snake:
         This is a loop in data/loop_game.py
         """
         Loop().loop_game(self.in_game, self.pg, self.back_ground, 
-                        self.pos_x, self.pos_y, self.p_snake, 
-                        self.p_snake, self.p_snake, self.speed_x, 
-                        self.speed_y, self.fps)           
+                        self.pos_x, self.pos_y, 
+                        self.p_snake, self.speed_x, 
+                        self.speed_y, self.apple_x, self.apple_y, self.fps)           

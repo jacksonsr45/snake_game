@@ -6,6 +6,7 @@ Default Widht to screen and Height
 """
 WIDTH = 640
 HEIGHT = 480
+PX = 10
 
 """
 Default Colors 
