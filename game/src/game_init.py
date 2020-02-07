@@ -1,7 +1,7 @@
 __author__ = "jacksonsr45@gmail.com"
 
 from game import constants as c
-
+from .import*
 
 
 class Snake:
@@ -46,19 +46,10 @@ class Snake:
                 self.pg.display.update()
 
             self.back_ground.fill(c.WHITE)
-            self.draw_snake(self.back_ground, self.pos_x, 
+
+            """
+            Update and Init class Snake has a snake in game
+            """
+            Draw_Snake().draw_snake( self.pg, self.back_ground, self.pos_x, 
                             self.pos_y, self.p_snake, self.p_snake)
             
-
-    def draw_snake(self, root, pos_x, pos_y, width, height):
-        """
-        Drawing snake in screen
-        receive values the __init__
-        :root: screen or root for snake
-        :pos_x: pos_x in root
-        :pos_y: pos_y in root
-        :width: pixels in width
-        :heigth: pixels in heigth
-        """
-        self.pg.draw.rect(root, c.BLACK, [ pos_x, 
-                            pos_y, width, height])
