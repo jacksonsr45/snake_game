@@ -16,7 +16,19 @@ class Loop(object):
             for event in pg.event.get():
                 if event.type == pg.QUIT:
                     in_game = False
-                pg.display.update()
+                
+                if event.type == pg.KEYDOWN:
+                    if event.key == pg.K_LEFT:
+                        pos_x -= 10
+                    if event.key == pg.K_RIGHT:
+                        pos_x += 10
+                    if event.key == pg.K_UP:
+                        pos_y -= 10
+                    if event.key == pg.K_DOWN:
+                        pos_y += 10
+                                          
+                            
+            pg.display.update()
 
             bg.fill(c.WHITE)
 
@@ -25,3 +37,4 @@ class Loop(object):
             """
             Draw_Snake().draw_snake( pg, bg, pos_x, 
                             pos_y, px_snake, py_snake)
+
