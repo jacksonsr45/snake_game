@@ -30,26 +30,8 @@ class Snake:
         """
         self.in_game = True
         
-        self.loop_game()
-
-    def loop_game( self):
         """
-        This loop for game 
-        While in_game True
-        :requere: self.in_game
-        :return: self.in_game  
+        This is a loop in data/loop_game.py
         """
-        while self.in_game:
-            for event in self.pg.event.get():
-                if event.type == self.pg.QUIT:
-                    self.in_game = False
-                self.pg.display.update()
-
-            self.back_ground.fill(c.WHITE)
-
-            """
-            Update and Init class Snake has a snake in game
-            """
-            Draw_Snake().draw_snake( self.pg, self.back_ground, self.pos_x, 
-                            self.pos_y, self.p_snake, self.p_snake)
-            
+        Loop().loop_game(self.in_game, self.pg, self.back_ground, 
+                        self.pos_x, self.pos_y, self.p_snake, self.p_snake)           
