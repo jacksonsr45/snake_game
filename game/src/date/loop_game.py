@@ -74,7 +74,7 @@ class Loop(object):
             Init screen back gound with color 
             WHITE from game and update in loop
             """
-            bg.fill(c.WHITE)
+            bg.fill(c.BLUE)
             
             """
             int pos_x and pos_y the snake with 
