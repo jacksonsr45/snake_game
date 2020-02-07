@@ -87,5 +87,18 @@ class Loop(object):
             """
             Display Updade <- fps in looping
             """
-            pg.display.update()
+
+            if pos_x == c.WIDTH-10:
+                speed_x = 0
+                speed_y = 0
+            elif pos_x <= 0:
+                speed_x = 0
+                speed_y = 0
+            elif pos_y == c.HEIGHT-10:
+                speed_x = 0
+                speed_y = 0
+            elif pos_y == 0:
+                speed_x = 0
+                speed_y = 0
             
+            pg.display.update()
