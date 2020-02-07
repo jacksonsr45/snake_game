@@ -11,6 +11,8 @@ class Draw_Snake(object):
         :width: pixels in width
         :heigth: pixels in heigth
         """
-        print(__snake_)    
-        
-        #return self.snake   
+        for snake in __snake_:
+            snake = pg.draw.rect(root, c.BLACK, [ __snake_[0][0], 
+                            __snake_[0][1], c.PX, c.PX])  
+            print(__snake_)
+        return snake   

@@ -13,11 +13,11 @@ class Loop(object):
         :requere: self.in_game
         :return: self.in_game  
         """
+        self.snake_cont = []
         
         cont = 0
-        snake_x = randint(0, (c.WIDTH - c.PX)/10)*10
-        snake_y = randint(0, (c.HEIGHT - c.PX)/10)*10
-        snake_cont = []
+        self.snake_x = randint(0, (c.WIDTH - c.PX)/10)*10
+        self.snake_y = randint(0, (c.HEIGHT - c.PX)/10)*10
         while in_game:
             """
             Limit for FPS in game 
@@ -79,8 +79,8 @@ class Loop(object):
             int pos_x and pos_y the snake with 
             speed_x and speed_y
             """                              
-            pos_x += speed_x
-            pos_y += speed_y
+            self.snake_x += speed_x
+            self.snake_y += speed_y
 
             
             """
@@ -91,17 +91,14 @@ class Loop(object):
             """
             Update and Init class Snake
             """
-            __snake_init = [ snake_x, snake_y]
-            snake_cont.append(__snake_init)
-            print(snake_cont)
+            self.__snake_init = []
+            self.__snake_init.append(self.snake_x)
+            self.__snake_init.append(self.snake_y) 
+            self.snake_cont.append(self.__snake_init)
             
-            if len(snake_cont) > cont:
-                del snake_cont[0]
+            self.snake = Draw_Snake().draw_snake( pg, bg, self.snake_cont, c.PX, c.PX)
 
-            Draw_Snake().draw_snake( pg, bg, snake_cont, c.PX, c.PX)
-            
-
-            if pos_x == apple_x and pos_y == apple_y:
+            if self.snake_x == apple_x and self.snake_y == apple_y:
                 apple_x = randint(0, (c.WIDTH - c.PX)/10)*10
                 apple_y = randint(0, (c.HEIGHT - c.PX)/10)*10
                 cont += 1
@@ -109,20 +106,20 @@ class Loop(object):
             """
             Testind colision with board screen 
             """
-            if pos_x > c.WIDTH-10:#Right
-                pos_x -= 10
+            if self.snake_x > c.WIDTH-10:#Right
+                self.snake_x -= 10
                 speed_x = 0
                 speed_y = 0
-            elif pos_x < 0:#left
-                pos_x = 0
+            elif self.snake_x < 0:#left
+                self.snake_x = 0
                 speed_x = 0
                 speed_y = 0
-            elif pos_y > c.HEIGHT-10:#down
-                pos_y -= 10
+            elif self.snake_y > c.HEIGHT-10:#down
+                self.snake_y -= 10
                 speed_x = 0
                 speed_y = 0
-            elif pos_y < 0:#up
-                pos_y = 0
+            elif self.snake_y < 0:#up
+                self.snake_y = 0
                 speed_x = 0
                 speed_y = 0
             
