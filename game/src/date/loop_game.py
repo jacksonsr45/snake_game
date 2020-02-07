@@ -11,13 +11,14 @@ class Loop(object):
         :requere: self.in_game
         :return: self.in_game  
         """
-        
+
         self.snake_cont = []
         cont = 0
-        self.snake_x = randint(0, (c.WIDTH - c.PX)/10)*10
-        self.snake_y = randint(0, (c.HEIGHT - c.PX)/10)*10
-        self.apple_x = randint(0, (c.WIDTH - c.PX)/10)*10
-        self.apple_y = randint(0, (c.HEIGHT - c.PX)/10)*10
+        self.snake_x = randint(0, (c.WIDTH - c.PX)/c.PX)*c.PX
+        self.snake_y = randint(0, (c.HEIGHT - c.PX)/c.PX)*c.PX
+        self.apple_x = randint(0, (c.WIDTH - c.PX)/c.PX)*c.PX
+        self.apple_y = randint(0, (c.HEIGHT - c.PX)/c.PX)*c.PX
+        self.score = 0
         while in_game:
             """
             Limit for FPS in game 
@@ -97,27 +98,43 @@ class Loop(object):
             self.snake_cont.append(self.__snake_init)
             Draw_Snake().draw_snake( pg, bg, self.snake_cont, c.PX, c.PX)
 
+            """
+            Default if snake is > cont 
+            delete Head 
+            """
             if len(self.snake_cont) > cont:
                 del self.snake_cont[0]
 
+            """
+            Testing colision in snake with apple 
+            """
             if self.snake_x == self.apple_x and self.snake_y == self.apple_y:
-                self.apple_x = randint(0, (c.WIDTH - c.PX)/10)*10
-                self.apple_y = randint(0, (c.HEIGHT - c.PX)/10)*10
+                self.apple_x = randint(0, (c.WIDTH - c.PX)/c.PX)*c.PX
+                self.apple_y = randint(0, (c.HEIGHT - c.PX)/c.PX)*c.PX
+                self.score += 1
                 cont += 1
+
+            """
+            Testing colision in snake with snake 
+            """
+            for x in self.snake_cont[:-1]:
+                if x == self.__snake_init:
+                    c.SPEED_X = 0
+                    c.SPEED_Y = 0
 
             """
             Testind colision with board screen 
             """
-            if self.snake_x > c.WIDTH-10:#Right
-                self.snake_x -= 10
+            if self.snake_x > c.WIDTH-c.PX:#Right
+                self.snake_x -= c.PX
                 c.SPEED_X = 0
                 c.SPEED_Y = 0
             elif self.snake_x < 0:#left
                 self.snake_x = 0
                 c.SPEED_X = 0
                 c.SPEED_Y = 0
-            elif self.snake_y > c.HEIGHT-10:#down
-                self.snake_y -= 10
+            elif self.snake_y > c.HEIGHT-c.PX:#down
+                self.snake_y -= c.PX
                 c.SPEED_X = 0
                 c.SPEED_Y = 0
             elif self.snake_y < 0:#up
@@ -128,4 +145,7 @@ class Loop(object):
             """
             Display Updade <- fps in looping
             """
+
+            Score().__score__( pg, bg, self.score)
+
             pg.display.update()

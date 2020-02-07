@@ -8,9 +8,6 @@ WIDTH = 640
 HEIGHT = 480
 PX = 10
 
-
-SNAKE_ = []
-
 SPEED_X = 0
 SPEED_Y = 0
 
