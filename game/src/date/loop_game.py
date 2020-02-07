@@ -84,21 +84,28 @@ class Loop(object):
             snake = Draw_Snake().draw_snake( pg, bg, pos_x, 
                                         pos_y, px_snake, py_snake)
 
-            """
-            Display Updade <- fps in looping
-            """
 
-            if pos_x == c.WIDTH-10:
+            """
+            Testind colision with board screen 
+            """
+            if pos_x > c.WIDTH-10:#Right
+                pos_x -= 10
                 speed_x = 0
                 speed_y = 0
-            elif pos_x <= 0:
+            elif pos_x < 0:#left
+                pos_x = 0
                 speed_x = 0
                 speed_y = 0
-            elif pos_y == c.HEIGHT-10:
+            elif pos_y > c.HEIGHT-10:#down
+                pos_y -= 10
                 speed_x = 0
                 speed_y = 0
-            elif pos_y == 0:
+            elif pos_y < 0:#up
+                pos_y = 0
                 speed_x = 0
                 speed_y = 0
             
+            """
+            Display Updade <- fps in looping
+            """
             pg.display.update()
