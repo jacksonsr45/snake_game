@@ -7,7 +7,7 @@ Default Widht to screen and Height
 WIDTH = 640
 HEIGHT = 480
 PX = 10
-
+SNAKE_ = []
 """
 Default Colors 
 """

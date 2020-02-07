@@ -13,8 +13,8 @@ class Loop(object):
         :requere: self.in_game
         :return: self.in_game  
         """
-        self.snake_cont = []
         
+        self.snake_cont = []
         cont = 0
         self.snake_x = randint(0, (c.WIDTH - c.PX)/10)*10
         self.snake_y = randint(0, (c.HEIGHT - c.PX)/10)*10
@@ -36,25 +36,25 @@ class Loop(object):
                         Direction == LEFT
                         """ 
                         speed_y = 0
-                        speed_x = -p_snake
+                        speed_x = -c.PX
                     if event.key == pg.K_RIGHT and speed_x != -p_snake:
                         """
                         Direction == RIGHT
                         """ 
                         speed_y = 0
-                        speed_x = p_snake
+                        speed_x = c.PX
                     if event.key == pg.K_UP and speed_y != p_snake:
                         """
                         Direction == UP
                         """ 
                         speed_x = 0
-                        speed_y = -p_snake
+                        speed_y = -c.PX
                     if event.key == pg.K_DOWN and speed_y != -p_snake:
                         """
                         Direction == DOWN
                         """ 
                         speed_x = 0
-                        speed_y = p_snake
+                        speed_y = c.PX
                     if event.key == pg.K_ESCAPE:
                         """
                         Press ESC to scape the game 
@@ -95,8 +95,10 @@ class Loop(object):
             self.__snake_init.append(self.snake_x)
             self.__snake_init.append(self.snake_y) 
             self.snake_cont.append(self.__snake_init)
-            
-            self.snake = Draw_Snake().draw_snake( pg, bg, self.snake_cont, c.PX, c.PX)
+            Draw_Snake().draw_snake( pg, bg, self.snake_cont, c.PX, c.PX)
+
+            if len(self.snake_cont) > cont:
+                del self.snake_cont[0]
 
             if self.snake_x == apple_x and self.snake_y == apple_y:
                 apple_x = randint(0, (c.WIDTH - c.PX)/10)*10
