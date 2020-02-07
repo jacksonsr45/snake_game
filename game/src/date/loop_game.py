@@ -27,17 +27,42 @@ class Loop(object):
                 
                 if event.type == pg.KEYDOWN:
                     if event.key == pg.K_LEFT:
+                        """
+                        Direction == LEFT
+                        """ 
                         speed_y = 0
                         speed_x = -p_snake
                     if event.key == pg.K_RIGHT:
+                        """
+                        Direction == RIGHT
+                        """ 
                         speed_y = 0
                         speed_x = p_snake
                     if event.key == pg.K_UP:
+                        """
+                        Direction == UP
+                        """ 
                         speed_x = 0
                         speed_y = -p_snake
                     if event.key == pg.K_DOWN:
+                        """
+                        Direction == DOWN
+                        """ 
                         speed_x = 0
                         speed_y = p_snake
+                    if event.key == pg.K_ESCAPE:
+                        """
+                        Press ESC to scape the game 
+                        :in_game: return False to escape game
+                        """ 
+                        in_game = False
+                    if event.key == pg.K_SPACE:
+                        """
+                        pause speed to the game 
+                        or pause game
+                        """ 
+                        speed_x = 0
+                        speed_y = 0
             
             """
             Init screen back gound with color 
@@ -53,14 +78,14 @@ class Loop(object):
             pos_y += speed_y
 
             """
+            Update and Init class Snake has a 
+            snake in game
+            """
+            snake = Draw_Snake().draw_snake( pg, bg, pos_x, 
+                                        pos_y, px_snake, py_snake)
+
+            """
             Display Updade <- fps in looping
             """
             pg.display.update()
             
-
-            """
-            Update and Init class Snake has a 
-            snake in game
-            """
-            Draw_Snake().draw_snake( pg, bg, pos_x, 
-                            pos_y, px_snake, py_snake)
