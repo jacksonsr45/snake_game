@@ -13,6 +13,4 @@ class Draw_Snake(object):
         """
         for row in __snake_:
             pg.draw.rect(root, c.BLACK, [ row[0], 
-                            row[1], c.PX, c.PX])  
-           
-           
+                            row[1], c.PX, c.PX])        

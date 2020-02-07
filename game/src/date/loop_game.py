@@ -4,9 +4,7 @@ from game import constants as c
 from .import*
 
 class Loop(object):
-    def loop_game( self, in_game, pg, bg, pos_x, 
-                            pos_y, p_snake, speed_x, speed_y, 
-                            apple_x, apple_y, fps):
+    def loop_game( self, in_game, pg, bg, fps):
         """
         This loop for game 
         While in_game True
@@ -18,6 +16,8 @@ class Loop(object):
         cont = 0
         self.snake_x = randint(0, (c.WIDTH - c.PX)/10)*10
         self.snake_y = randint(0, (c.HEIGHT - c.PX)/10)*10
+        self.apple_x = randint(0, (c.WIDTH - c.PX)/10)*10
+        self.apple_y = randint(0, (c.HEIGHT - c.PX)/10)*10
         while in_game:
             """
             Limit for FPS in game 
@@ -31,30 +31,30 @@ class Loop(object):
                     in_game = False
                 
                 if event.type == pg.KEYDOWN:
-                    if event.key == pg.K_LEFT and speed_x != p_snake:
+                    if event.key == pg.K_LEFT and c.SPEED_X != c.PX:
                         """
                         Direction == LEFT
                         """ 
-                        speed_y = 0
-                        speed_x = -c.PX
-                    if event.key == pg.K_RIGHT and speed_x != -p_snake:
+                        c.SPEED_Y = 0
+                        c.SPEED_X = -c.PX
+                    if event.key == pg.K_RIGHT and c.SPEED_X != -c.PX:
                         """
                         Direction == RIGHT
                         """ 
-                        speed_y = 0
-                        speed_x = c.PX
-                    if event.key == pg.K_UP and speed_y != p_snake:
+                        c.SPEED_Y = 0
+                        c.SPEED_X = c.PX
+                    if event.key == pg.K_UP and c.SPEED_Y != c.PX:
                         """
                         Direction == UP
                         """ 
-                        speed_x = 0
-                        speed_y = -c.PX
-                    if event.key == pg.K_DOWN and speed_y != -p_snake:
+                        c.SPEED_X = 0
+                        c.SPEED_Y = -c.PX
+                    if event.key == pg.K_DOWN and c.SPEED_Y != -c.PX:
                         """
                         Direction == DOWN
                         """ 
-                        speed_x = 0
-                        speed_y = c.PX
+                        c.SPEED_X = 0
+                        c.SPEED_Y = c.PX
                     if event.key == pg.K_ESCAPE:
                         """
                         Press ESC to scape the game 
@@ -66,8 +66,8 @@ class Loop(object):
                         pause speed to the game 
                         or pause game
                         """ 
-                        speed_x = 0
-                        speed_y = 0
+                        c.SPEED_X = 0
+                        c.SPEED_Y = 0
             
             """
             Init screen back gound with color 
@@ -79,14 +79,14 @@ class Loop(object):
             int pos_x and pos_y the snake with 
             speed_x and speed_y
             """                              
-            self.snake_x += speed_x
-            self.snake_y += speed_y
+            self.snake_x += c.SPEED_X
+            self.snake_y += c.SPEED_Y
 
             
             """
             Update and Init class Apple            """
-            Draw_Apple().__apple__( pg, bg, apple_x,
-                                    apple_y, c.PX, c.PX)
+            Draw_Apple().__apple__( pg, bg, self.apple_x,
+                                    self.apple_y, c.PX, c.PX)
             
             """
             Update and Init class Snake
@@ -100,9 +100,9 @@ class Loop(object):
             if len(self.snake_cont) > cont:
                 del self.snake_cont[0]
 
-            if self.snake_x == apple_x and self.snake_y == apple_y:
-                apple_x = randint(0, (c.WIDTH - c.PX)/10)*10
-                apple_y = randint(0, (c.HEIGHT - c.PX)/10)*10
+            if self.snake_x == self.apple_x and self.snake_y == self.apple_y:
+                self.apple_x = randint(0, (c.WIDTH - c.PX)/10)*10
+                self.apple_y = randint(0, (c.HEIGHT - c.PX)/10)*10
                 cont += 1
 
             """
@@ -110,20 +110,20 @@ class Loop(object):
             """
             if self.snake_x > c.WIDTH-10:#Right
                 self.snake_x -= 10
-                speed_x = 0
-                speed_y = 0
+                c.SPEED_X = 0
+                c.SPEED_Y = 0
             elif self.snake_x < 0:#left
                 self.snake_x = 0
-                speed_x = 0
-                speed_y = 0
+                c.SPEED_X = 0
+                c.SPEED_Y = 0
             elif self.snake_y > c.HEIGHT-10:#down
                 self.snake_y -= 10
-                speed_x = 0
-                speed_y = 0
+                c.SPEED_X = 0
+                c.SPEED_Y = 0
             elif self.snake_y < 0:#up
                 self.snake_y = 0
-                speed_x = 0
-                speed_y = 0
+                c.SPEED_X = 0
+                c.SPEED_Y = 0
             
             """
             Display Updade <- fps in looping
