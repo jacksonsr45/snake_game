@@ -6,7 +6,7 @@ Default Widht to screen and Height
 """
 WIDTH = 640
 HEIGHT = 480
-PX = 20
+PX = 20.0
 
 SPEED_X = 0
 SPEED_Y = 0
